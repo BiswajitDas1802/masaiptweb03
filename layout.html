@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        body{
+            background-color: black;
+            display:flex;
+            justify-content:center;
+            align-items: center;
+
+        }
+        .outer{
+            width: 80%;
+            padding:20px;
+            background-color:white;
+        }
+        .card{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-around;
+            /* height:500px; */
+        }
+        .card>div{
+            width: 31%;
+            border: 1px solid grey;
+            /* margin-right: 30px; */
+            height:60%;
+            min-height: 340px;
+            min-width: 300px;
+            border-radius:5px ;
+
+            /* padding:10px; */
+        }
+        div img{
+            width: 100%;
+            border-bottom: 1px solid grey;
+            height:40%;
+            max-height: 200px;
+            min-height: 200px;
+        }
+        img+div{
+            padding-left:10px;
+            line-height: 10px;
+        }
+        .card2{
+            display:flex;
+            flex-wrap: wrap;
+            justify-content:space-around;
+            align-items: center;
+        }
+        .card2>div{
+            width: 30%;
+            padding-left:10px;
+            min-width: 300px;
+            margin-bottom: 20px;
+            height:120px;
+            display: flex;
+            justify-content:space-between;
+            /* align-items: center; */
+            border:1px solid grey;
+            border-radius:5px ;
+        }
+        h3{
+            line-height:17px;
+        }
+        h3+a{
+            color:blue;
+            font-weight: 600;
+        }
+        .card>div:nth-child(2)>div>h3{
+            text-decoration: underline;
+        }
+        .card2>div>div>p{
+            color:gray;
+          
+            font-weight:500;
+        }
+        .card2>div>div:nth-child(2){
+            width: 40px;
+            height:100%;
+            /* background-color:green; */
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top>h4{
+            color:gray;
+            margin-top:-10px;
+            margin-left: 10px;
+        }
+        .bottom>h4{
+            color:gray;
+            margin-top:50px;
+            margin-bottom:30px ;
+            margin-left: 13px;
+        }
+        h3+p{
+            font-weight:600;
+        }
+        @media screen and (max-width:1000px) {
+            .outer{
+                width: 100%;
+            }
+            .card>div{
+                margin-bottom: 20px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="top">
+            <h4>CHALLENGE SOLVED WITH SANITY</h4>
+            <div class ='card'>
+                <div>
+                    <img src="https://www.timeforkids.com/wp-content/uploads/2020/02/feature-cover_-train-k1.jpg" alt="">
+                    <div>
+                        <p>Eurostar</p>
+                        <h3>A better digital experience for millions of travellers</h3>
+                        <a>Read case study -></a>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://pbs.twimg.com/media/CfU3mhwVAAAairp.jpg" alt="">
+                    <div>
+                        <p>ahm</p>
+                        <h3>Introducing a powerful backend for Australia's second largest health insurer</h3>
+                        <a>Read case study -></a>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://i.shgcdn.com/18314f18-9776-4758-b60c-76f66e57aa55/-/format/auto/-/preview/3000x3000/-/quality/lighter/" alt="">
+                    <div>
+                        <p>XXL</p>
+                        <h3>Improving time to market for the largest Nordic sports retailer</h3>
+                        <a>Read case study -></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <h4>EXPLORE SOLUTIONS</h4>
+            <div class="card2">
+                <div>
+                    <div>
+                        <h3>Headless CMS</h3>
+                        <p>Build cutting-edge web experience without restrictions </p>
+                    </div>
+                    <div>
+                        →
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h3>Landing page builder</h3>
+                        <p>Empower your marketers, unchain your engineers. </p>
+                    </div>
+                    <div>
+                        →
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h3>Audience segmentation</h3>
+                        <p>Personalize content at scale </p>
+                    </div>
+                    <div>
+                        →
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h3>E-commerce</h3>
+                        <p>Leverage headless commerce technology to sell anywhere</div>
+                    <div>
+                        →
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h3>Editorial Workflow</h3>
+                        <p>Enhance the auditoria experience </p>
+                    </div>
+                    <div>
+                        →
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h3>Multi-dataset architecture</h3>
+                        <p>Fuel your entire ecosystem with one centralized content hub</p>
+                    </div>
+                    <div>
+                        →
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
