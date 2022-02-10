@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        body{
+            background-color: black;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .main_card{
+            width:32%;
+            height:550px;
+            background-color:#302e30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .main_inner{
+            width:90%;
+            height:90%;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .invit{
+            text-align: center;
+            height:60px;
+            margin-top:20px;
+            margin-bottom:20px;
+        }
+        .button{
+            width:100%;
+            height:45px;
+            border-radius: 20px;
+            background-color:#ff016d;
+            color:white;
+            border: none;
+            margin-top: 40px;
+        }
+        .pin{
+            color:#ff016d;
+            font-size:26px;
+            font-weight:500;
+        }
+        .head{
+            color:white;
+            font-size: 20px;
+        }
+        .top{
+            margin-top:-20px;
+        }
+        .sec{
+            font-size:20px;
+        }
+        p{
+            margin-bottom: -20px;
+        }
+        .under{
+            width:60px;
+            height:3px;
+            background-color:white;
+            margin-top:40px;
+            margin-left:70px;
+        }
+        .under2{
+            width:60px;
+            height:3px;
+            background-color:white;
+            margin-top:40px;
+            margin-left:132px;
+        }
+    </style>
+    </head>
+
+    <body>
+        <button>Create Page</button>
+    </body>
+    <script type="text/javascript">
+        let btn = document.querySelector('button')
+        btn.addEventListener('click',createPage)
+        function createPage(){
+          console.log("hello")
+          let body =  document.querySelector("body")
+          let div = document.createElement("div")
+          div.setAttribute("class","main_card")
+          body.appendChild(div)
+          let divin = document.createElement("div")
+          divin.setAttribute("class","main_inner")
+          div.appendChild(divin)
+          let divinvite = document.createElement("div")
+          divinvite.setAttribute("class","invit top")
+          divin.appendChild(divinvite)
+          let h3 = document.createElement("h3")
+          h3.setAttribute("class","head")
+          h3.innerText="Today Sun,26th Apr"
+          let h32 = document.createElement("h3")
+          h32.setAttribute("class","head")
+          h32.innerText="Scheduled -7:00 AM onwards"
+          divinvite.append(h3,h32)
+
+          let arr = [{head:"parathe sarathe with",pin:"Chef Archana Doshi"},{head:"Spices and Immunity with",pin:"Nutrition Expert Manasa Ranjan"},{head:"Postman Vegetables with",pin:"Chef Jason D'Souza"}]
+          for(let i = 0 ;i<arr.length ;i++){
+              
+              let di = document.createElement("div");
+              di.setAttribute("class","invit")
+              let p1 = document.createElement("p")
+              p1.innerText=arr[i].head
+              p1.setAttribute("class","head sec")
+              let p2 = document.createElement("p")
+              p2.innerText=arr[i].pin
+              p2.setAttribute("class","pin")
+              divin.appendChild(di)
+              
+              let line = document.createElement("div")
+              if(i == 0){
+                line.setAttribute("class","under")
+                di.append(p1,p2,line)
+              }else if(i==1){
+                line.setAttribute("class","under2")
+                di.append(p1,p2,line) 
+              }else{
+                di.append(p1,p2)
+              }
+          }
+          let btn = document.createElement("button")
+          btn.setAttribute("class","button")
+          btn.innerText="SIGN UP NOW"
+          divin.appendChild(btn)
+        }
+    </script>
+</html>
