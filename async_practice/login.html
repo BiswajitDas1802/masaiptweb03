@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .Navbar{
+            width: 100%;
+            border:1px solid black;
+            display: flex;
+            justify-content:right;
+        }
+        .Navbar>a{
+            margin:20px;
+            font-weight: 600;
+            font-size:24px;
+            color:black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="Navbar">
+        <a id = "home" href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a>Sign Up</a>
+    </div>
+    <h1>Login</h1>
+    <div class="login">
+        <form>
+            <input type="email" id="email" required placeholder="Enter your email"></input>
+            <input type="password" id="password" required placeholder="Enter your password"></input>
+            <button type="submit" >Submit</button>
+        </form>
+    </div>
+</body>
+<script type="text/javascript">
+    let pemail = "dasb1283@gmail.com"
+    let ppass = "Noisyboii"
+    let login = false
+    let hm = document.getElementById("home")
+    hm.addEventListener("click",check)
+
+    function check(event){
+        event.preventDefault();
+        if(!login){
+            alert("Please login first")
+            redirect()
+        }
+    }
+
+    function redirect(event ){
+        // event.preventDefault();
+        if(!login){
+            window.location.href = 'file:///D:/masai/html,css/async_practice/login.html'
+        }else{
+            window.location.href = 'file:///D:/masai/html,css/async_practice/index.html'
+        }
+    }
+    // redirect()
+    
+    function submit(event){
+        event.preventDefault();
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        console.log(email, password)
+        if(email == pemail && ppass == password){
+            login = true
+            console.log(window.location.href)
+            redirect()
+            // window.location.href = 'file:///D:/masai/html,css/async_practice/index.html'
+        }else{
+            alert('Please enter a valid email address and password')
+            redirect()
+        }
+    }
+
+    let fm = document.querySelector("form")
+    fm.addEventListener('submit',submit)
+
+</script>
+</html>
