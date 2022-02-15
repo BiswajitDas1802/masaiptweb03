@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         #container{
+            display:flex;
+            flex-wrap: wrap;
+            justify-content:space-around;
+            background-color:grey;
+        }
+        #container>div{
+            width: 100%;
+            min-width: 400px;
+            max-width: 400px;
+            background-color:white;
+            margin-top:30px;
+            padding: 30px;
+            border-radius:10px;
+
+        }
+        #container>div>img{
+            width: 100%;
+            height:250px;
+        }
+        .navbar{
+            display:flex;
+            position:fixed;
+            width:100%;
+            margin-top:-20px;
+            background-color:rgb(101, 162, 177);
+            padding:20px;
+            justify-content:right;
+        }
+        .navbar>a{
+            font-size:34px;
+            font-weight:600;
+            text-decoration: none;
+            margin-right: 30px;
+            color:black;
+            margin-right: 40px;
+        }
+        input{
+            height:40px;
+            margin-bottom:30px;
+            margin-top:30px;
+            width:300px;
+            outline:none;
+            font-size:24px;
+            border-radius: 10px 0px 0px 10px;
+            padding-left:20px;
+            /* border:3px; */
+        }
+        button{
+            margin-top:30px;
+            margin-bottom:30px;
+            width: 20%;
+            height: 46px;
+            border-radius: 0px 10px 10px 0px;
+            font-size: 20px;
+            font-weight:600;
+            color:rgb(78, 129, 112);
+        }
+        .abc{
+            display:flex;
+            justify-content:center;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">HomePage</a>
+        <a href="search.html">Search</a>
+    </div>
+
+    <h1>Search Page</h1>
+    <div class="abc">
+        <input type="text" id="search">
+        <button type="button" onclick="news()">Search</button>
+    </div>
+    <div id = "container"></div>
+</body>
+<script type="text/javascript">
+     let data = document.getElementById("container");
+ 
+     async function news(){
+         try{
+            let key = "621f2003f6fc463cb08d0daa0c976b6b"
+            let search = document.getElementById("search").value;
+            let data = await fetch(`https://newsapi.org/v2/everything?q=${search}&from=2022-02-14&sortBy=popularity&apiKey=${key}`)
+            data = await data.json()
+            console.log(data)
+            rows(data.articles)
+        }
+        catch{
+            alert('couldnt fetch')
+        }
+    }
+
+    function rows(arr){
+        arr.forEach((elem)=>{
+
+            let div = document.createElement('div')
+            div.innerHTML =""
+            let img = document.createElement('img')
+            let h2 = document.createElement('h2')
+            let p = document.createElement("p")
+            let p2 = document.createElement("p")
+            img.src = elem.urlToImage
+            h2.innerText= elem.title
+            p.innerText= elem.author
+            p2.innerText = elem.description
+            div.append(img,h2,p,p2)
+            data.append(div)
+        })
+    }
+</script>
+</html>
