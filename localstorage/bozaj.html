@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            display:flex;
+        }
+        body>div:nth-child(1){
+            width: 35%;
+            /* border:1px solid red; */
+
+        }
+        body>div:nth-child(2){
+            width: 65%;
+            padding-top: 43px;
+            /* border:1px solid red; */
+
+        }
+        th,td{
+            border-bottom:3px solid rgb(193, 197, 197);
+            text-align: center;
+            padding:10px 0;
+            font-size: 17px;
+            font-weight:600;
+        }
+        /* th{
+            width: 100px;
+        } */
+        table{
+            width: 100%;
+        }
+        /* tr>th:nth-child(3){
+            display:flex;
+            align-items: center;
+            justify-content:center;
+        } */
+        .del{
+            width: 100%;
+            outline:none;
+            background-color:red;
+            border:none;
+            color:white;
+            height:100%;
+            cursor: pointer;
+        }
+        h1{
+            color:rgb(97, 138, 138);
+        }
+        #form{
+            display:flex;
+            flex-direction: column;
+            padding:40px;
+        }
+        button{
+            background-color:rgb(72, 124, 173);
+            width:80px;
+            height:40px;
+            margin-top:30px;
+            border:none;
+            color:white;
+            border-radius:3px;
+        }
+        input,select{
+            width:80%;
+            height:40px;
+            border:2px solid rgb(211, 205, 205);
+            border-radius:3px;
+            outline:none;
+        }
+        textarea{
+            height:100px;
+            width:80%;
+            border-radius:3px;
+            border:2px solid rgb(211, 205, 205);
+            outline:none;
+        }
+    </style>
+</head>
+<body>
+    <div id="form">
+       <h1>Add Product</h1>
+       <p>catagory</p>
+       <select id="select">
+           <option value="electronics">electronics</option>
+           <option value="Furniture">Furniture</option>
+           <option value="Home Appliance">Home Appliance</option>
+           <option value="Books">Books</option>
+       </select>
+       <p>Title</p>
+       <input type="text" id="title" placeholder="Enter your Item">
+       <p>Description</p>
+       <textarea type="number" id="desc" placeholder="Quantity">
+       </textarea>
+       <p>Price</p>
+       <input type="number" id="price">
+       <br/>
+       <button onclick="creat()">Add</button> 
+       <!-- <button onclick="del()">Delete ALL</button> -->
+    </div>   
+    <div id="list">
+        <h1>Product Info</h1>
+    </div>
+</body>
+</html>
+<script>
+    let list = JSON.parse(localStorage.getItem("list"))
+    if(list === null){
+        localStorage.setItem("list",JSON.stringify([]))
+    }
+    function creat(){
+        
+        let select = document.getElementById("select")
+        let desc = document.getElementById("desc")
+        let title = document.getElementById("title")
+        let price = document.getElementById("price")
+      
+        let obj={
+           "title":title.value,
+           "catagory":select.value,
+           "desc":desc.value,
+           "price":price.value
+        }
+        list.push(obj)
+        localStorage.setItem("list", JSON.stringify(list))
+        select.value=""
+        desc.value=""
+        title.value=""
+        price.value=""
+        create(list.length,list[list.length-1])
+        
+    }
+
+
+
+    let right = document.getElementById("list")
+    let table = document.createElement("table")
+    let thead = document.createElement("thead")
+    let theadRow = document.createElement("tr")
+    let th1 = document.createElement("th")
+    th1.innerText = "#"
+    let th2 = document.createElement("th")
+    th2.innerText = "Catagory"
+    let th3 = document.createElement("th")
+    th3.innerText = "Title"
+    let th4 = document.createElement("th")
+    th4.innerText = "Description"
+    let th5 = document.createElement("th")
+    th5.innerText = "Price"
+   
+    table.append(thead,theadRow)
+    theadRow.append(th1,th2,th3,th4,th5)
+    right.append(table)
+
+
+    function create(no,elem){
+            let tr = document.createElement("tr")
+            let td1 = document.createElement("td")
+            td1.innerText = no
+            let td2 = document.createElement("td")
+            td2.innerText = elem.catagory
+            let td3 = document.createElement("td")
+            td3.innerText = elem.title
+            let td4 = document.createElement("td")
+            td4.innerText = elem.desc
+            let td5 = document.createElement("td")
+            td5.innerText = elem.price
+            tr.append(td1,td2,td3,td4,td5)
+            table.append(tr)
+    }
+    if(list!=null) {
+        list.forEach((elem,i)=>{
+            create(i+1,elem)
+        })
+    }
+
+
+    
+</script>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            display:flex;
+        }
+        body>div{
+            width: 100%;
+            border:1px solid red;
+
+        }
+        table,th,td{
+            border:1px solid red;
+        }
+        th{
+            width: 100px;
+        }
+        table{
+            width: 100%;
+        }
+        /* tr>th:nth-child(3){
+            display:flex;
+            align-items: center;
+            justify-content:center;
+        } */
+        .del{
+            width: 100%;
+            outline:none;
+            background-color:red;
+            border:none;
+            color:white;
+            height:100%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="form">
+       <h1>Grocery List</h1>
+       <input type="text" id="grocery" placeholder="Enter your Item">
+       <input type="number" id="quan" placeholder="Quantity">
+       <button onclick="creat()"> Create</button> 
+       <!-- <button onclick="del()">Delete ALL</button> -->
+    </div>   
+    <div id="list"></div>
+</body>
+</html>
+<script>
+    let list = JSON.parse(localStorage.getItem("list"))
+    if(list === null){
+        localStorage.setItem("list",JSON.stringify([]))
+    }
+    function creat(){
+        
+        let grocery = document.getElementById("grocery")
+        let quan = document.getElementById("quan")
+        let obj={
+           "name":grocery.value,
+           "quan":quan.value
+        }
+        
+        list.push(obj)
+        localStorage.setItem("list", JSON.stringify(list))
+        grocery.value=""
+        quan.value=""
+        console.log(list)
+        create(list[list.length-1])
+        
+    }
+
+    function del(){
+        localStorage.clear()
+        localStorage.setItem("list", JSON.stringify([]))
+    }
+
+
+
+    let right = document.getElementById("list")
+    let table = document.createElement("table")
+    let thead = document.createElement("thead")
+    let theadRow = document.createElement("tr")
+    let th1 = document.createElement("th")
+    th1.innerText = "item"
+    let th2 = document.createElement("th")
+    th2.innerText = "quantity"
+    let th3 = document.createElement("th")
+    th3.innerText = "remove"
+    table.append(thead,theadRow)
+    theadRow.append(th1,th2,th3)
+    right.append(table)
+
+
+    function create(elem){
+            let tr = document.createElement("tr")
+            let td1 = document.createElement("td")
+            td1.innerText = elem.name
+            let td2 = document.createElement("td")
+            td2.innerText = elem.quan
+            let del = document.createElement("button")
+            del.setAttribute("class","del")
+            del.innerText = "delete"
+            del.onclick=function() {
+                deleteItem(elem)
+            }
+            tr.append(td1,td2,del)
+            table.append(tr)
+    }
+    if(list!=null) {
+        list.forEach((elem)=>{
+            create(elem)
+        })
+    }
+
+    function deleteItem(data){
+        list=list.filter((elem)=>(elem.name!==data.name&&elem))
+        localStorage.setItem("list", JSON.stringify(list))
+        table.innerHTML=""
+        let thead = document.createElement("thead")
+        let theadRow = document.createElement("tr")
+        let th1 = document.createElement("th")
+        th1.innerText = "item"
+        let th2 = document.createElement("th")
+        th2.innerText = "quantity"
+        let th3 = document.createElement("th")
+        th3.innerText = "remove"
+        table.append(thead,theadRow)
+        theadRow.append(th1,th2,th3)
+        right.append(table)
+        list.forEach((elem)=>{
+            create(elem)
+        })
+    }
+
+
+    
+</script>
