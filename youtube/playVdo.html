@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            
+        }
+        .Navbar{
+            width:100%;
+            height:80px;
+            background-color:rgb(41, 38, 38);
+            display:flex;
+            justify-content:space-around;
+        }
+        .Navbar>div{
+            /* width:30%; */
+            /* border: 1px solid red; */
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .search{
+            width: 50%;
+        }
+        
+        #search{
+            background-color:black;
+            height:50px;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: white;
+            font-size:30px;
+            padding-left:30px;
+        }
+        #search::-ms-thumb{
+            color: white;
+        }
+        #submit{
+            height:50px;
+            width:100px;
+            background:rgb(54, 53, 53);
+            font-size:25px;
+            border:none;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        button>img{
+            width: 100%;
+            background:rgb(54, 53, 53);
+        }
+        h1{
+            color:white
+        }
+        #result{
+            background-color:black;
+            width:100%;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-around;
+        }
+        #result>a{
+            width: 100%;
+            height: 300px;
+            display: flex;
+            /* max-width: 320px;
+            min-width: 300px; */
+            /* height:400px; */
+            /* line-height: 35px; */
+            
+        }
+        a>div{
+            width: 100%;
+            display: flex;
+        }
+        #result>a>div>img{
+            width: 30%;
+
+             height: 100%;
+        }
+        #result>a>div>div{
+           margin-top:30px;
+           margin-left:20px;
+        }
+        .logo{
+            width: 150px;
+            display: flex;
+            cursor: pointer;
+
+        }
+        .logo>h1{
+            width: 80px;
+            /* margin-top:25px; */
+        }
+        .Navbar>a{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .player{
+            width: 100%;
+            display: flex;
+        }
+        .player>div{
+            width: 100%;
+            background-color:rgb(24, 23, 23);
+
+        }
+        #vdo2>div{
+            padding-left: 40px;
+            width: 80%;
+            display: flex;
+            /* border: 1px solid red; */
+            color: white;
+        }
+        #vdo2>div>img{
+            width: 30%;
+        }
+        #vdo2>div>div{
+            margin-top:13px;
+            padding-left: 10px;
+            line-height: 30px;
+        }
+        
+        #top{
+            width:100%;
+            height:80px;
+            display: flex;
+            /* border: 1px solid white; */
+            overflow-x: scroll;
+            padding-left:30px;
+            padding-right: 30px;
+            padding-top:30px;
+        }
+        #top::-webkit-scrollbar{
+            display:none
+        }
+        #top>div{
+            border-radius: 30px;
+            background:rgb(54, 53, 53);
+            width: 100%;
+            min-width: 60px;
+            padding: 5px;
+            min-width: 100px;
+            height:50px;
+            min-height:50px;
+            margin-right: 30px;
+            color:white;
+            font-size:16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #vdo1{
+            max-width: 50%;
+        }
+        #container{
+            overflow-x: hidden;
+        }
+        #vdo{
+            padding: 30px 30px 0 30px;
+            min-width: 800px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+    <div class="Navbar">
+        <!-- <a href="homePage.html" > -->
+        <div id="home" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48"
+                style=" fill:#000000;">
+                <path fill="#FF3D00"
+                    d="M43.2,33.9c-0.4,2.1-2.1,3.7-4.2,4c-3.3,0.5-8.8,1.1-15,1.1c-6.1,0-11.6-0.6-15-1.1c-2.1-0.3-3.8-1.9-4.2-4C4.4,31.6,4,28.2,4,24c0-4.2,0.4-7.6,0.8-9.9c0.4-2.1,2.1-3.7,4.2-4C12.3,9.6,17.8,9,24,9c6.2,0,11.6,0.6,15,1.1c2.1,0.3,3.8,1.9,4.2,4c0.4,2.3,0.9,5.7,0.9,9.9C44,28.2,43.6,31.6,43.2,33.9z">
+                </path>
+                <path fill="#FFF" d="M20 31L20 17 32 24z"></path>
+            </svg>
+            <h1>YouTube</h1>
+            
+        </div>
+        <!-- </a> -->
+        <div class="search">
+            <input type="text" placeholder="Search" id="search"></input>
+            <button id="submit" onclick="search()">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0 0 28 28"
+                    style=" fill:#e9e3e3;">
+                    <path
+                        d="M 9 2 C 5.1458514 2 2 5.1458514 2 9 C 2 12.854149 5.1458514 16 9 16 C 10.747998 16 12.345009 15.348024 13.574219 14.28125 L 14 14.707031 L 14 16 L 20 22 L 22 20 L 16 14 L 14.707031 14 L 14.28125 13.574219 C 15.348024 12.345009 16 10.747998 16 9 C 16 5.1458514 12.854149 2 9 2 z M 9 4 C 11.773268 4 14 6.2267316 14 9 C 14 11.773268 11.773268 14 9 14 C 6.2267316 14 4 11.773268 4 9 C 4 6.2267316 6.2267316 4 9 4 z">
+                    </path>
+                </svg>
+            </a>
+        </div>
+        <div class="logo"></div>
+    </div>
+    <div class="player">
+        <div id="vdo"></div>
+        <div id="vdo1">
+            <div id="top">
+
+            </div>
+            <div id="vdo2">
+            
+            </div>
+
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+<script>
+    let div2 = document.getElementById("vdo2")
+    let VideoId = JSON.parse(localStorage.getItem("videoId"))
+    console.log(VideoId)
+    let home = document.getElementById("home")
+    home.onclick = function() {
+        let newloc = window.location.href.split("/")
+            newloc[newloc.length - 1] = "index.html"
+            window.location.href = newloc.join("/")
+    }
+    console.log(VideoId)
+    const {id:{videoId}} = VideoId
+    let container = document.getElementById("vdo");
+    let iframe = document.createElement("iframe");
+    iframe.src = `http://www.youtube.com/embed/${videoId}`
+    iframe.width= "100%"
+    iframe.height="500px"
+    container.appendChild(iframe)
+
+    let toShow = JSON.parse(localStorage.getItem("toShow"))
+    console.log(toShow)
+    toShow.forEach((elem)=>create(elem)) 
+
+    let arr = ["All","Bgmi","Food","Related","live","Recently Uploaded","Watched","Most Popular"]
+    let vid1 = document.getElementById("top")
+    arr.forEach((elem)=>{
+        let div = document.createElement("div")
+        div.innerText=elem
+        vid1.append(div)
+      }
+    )
+
+
+    function create(data){
+        let {id,snippet,thumbnail} =data
+        let div = document.createElement("div")
+        let img = document.createElement("img")
+        let h2 = document.createElement("h3")
+        let p = document.createElement("p")
+        let indiv = document.createElement("div")
+        p.innerText = snippet.channelTitle
+        img.src = snippet.thumbnails.high.url
+        let title = snippet.title
+        if(title.length>=30){
+            h2.innerText= title.substring(0,30)+"..."   
+        }
+        indiv.append(h2,p)
+        div.append(img,indiv)
+        
+        div2.append(div)
+    }
+</script>

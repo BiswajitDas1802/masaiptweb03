@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .Navbar{
+            width:100%;
+            height:80px;
+            background-color:rgb(41, 38, 38);
+            display:flex;
+            justify-content:space-around;
+        }
+        .Navbar>div{
+            /* width:30%; */
+            /* border: 1px solid red; */
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .search{
+            width: 50%;
+        }
+        
+        #search{
+            background-color:black;
+            height:50px;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: white;
+            font-size:30px;
+            padding-left:30px;
+        }
+        #search::-ms-thumb{
+            color: white;
+        }
+        #submit{
+            height:50px;
+            width:100px;
+            background:rgb(54, 53, 53);
+            font-size:25px;
+            border:none;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        button>img{
+            width: 100%;
+            background:rgb(54, 53, 53);
+        }
+        h1{
+            color:white
+        }
+        #result{
+            background-color:black;
+            width:95%;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-around;
+            padding-left: 5%;
+        }
+        #result>a{
+            width: 100%;
+            height: 300px;
+            display: flex;
+            text-decoration: none;
+            color:white;
+            
+        }
+        a>div{
+            width: 100%;
+            display: flex;
+        }
+        #result>a>div>img{
+            width: 30%;
+
+             height: 100%;
+        }
+        #result>a>div>div{
+           margin-top:30px;
+           margin-left:20px;
+        }
+        .logo{
+            width: 150px;
+            display: flex;
+            cursor: pointer;
+        }
+        .logo>h1{
+            width: 80px;
+            margin-top:5px;
+        }
+        .Navbar>a{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div class="Navbar">
+            <!-- <a href="homePage.html" > -->
+            <div id="home" class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48"
+                    style=" fill:#000000;">
+                    <path fill="#FF3D00"
+                        d="M43.2,33.9c-0.4,2.1-2.1,3.7-4.2,4c-3.3,0.5-8.8,1.1-15,1.1c-6.1,0-11.6-0.6-15-1.1c-2.1-0.3-3.8-1.9-4.2-4C4.4,31.6,4,28.2,4,24c0-4.2,0.4-7.6,0.8-9.9c0.4-2.1,2.1-3.7,4.2-4C12.3,9.6,17.8,9,24,9c6.2,0,11.6,0.6,15,1.1c2.1,0.3,3.8,1.9,4.2,4c0.4,2.3,0.9,5.7,0.9,9.9C44,28.2,43.6,31.6,43.2,33.9z">
+                    </path>
+                    <path fill="#FFF" d="M20 31L20 17 32 24z"></path>
+                </svg>
+                <h1>YouTube</h1>
+                
+            </div>
+            <!-- </a> -->
+            <div class="search">
+                <input type="text" placeholder="Search" id="search"></input>
+                <button id="submit" onclick="search()">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="40" viewBox="0 0 28 28"
+                        style=" fill:#e9e3e3;">
+                        <path
+                            d="M 9 2 C 5.1458514 2 2 5.1458514 2 9 C 2 12.854149 5.1458514 16 9 16 C 10.747998 16 12.345009 15.348024 13.574219 14.28125 L 14 14.707031 L 14 16 L 20 22 L 22 20 L 16 14 L 14.707031 14 L 14.28125 13.574219 C 15.348024 12.345009 16 10.747998 16 9 C 16 5.1458514 12.854149 2 9 2 z M 9 4 C 11.773268 4 14 6.2267316 14 9 C 14 11.773268 11.773268 14 9 14 C 6.2267316 14 4 11.773268 4 9 C 4 6.2267316 6.2267316 4 9 4 z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div class="logo"></div>
+        </div>
+        <div id="result">
+
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    let suggetions = document.getElementById("result")
+        let key =  "AIzaSyDiSLqaF_AhSyWnKiFIrv4u-cRlh5xM7yU"
+        let home = document.getElementById("home")
+        home.onclick = function() {
+        let newloc = window.location.href.split("/")
+            newloc[newloc.length - 1] = "index.html"
+            window.location.href = newloc.join("/")
+    }
+
+    // async function yt(){
+    //     try {
+    //         let data = await fetch(`https://youtube.googleapis.com/youtube/v3/search?key=${key}&q=trending&maxResults=50&thumbnail&type=video&part=snippet`)
+    //         data = await data.json()
+    //         let {id,snippet} = data.items
+    //         // console.log(data.items)
+    //         data.items.forEach((elem)=>create(elem))
+    //     } catch(err) {
+    //         console.log(err)
+    //     }
+    // }
+    // yt()
+    let nData = JSON.parse(localStorage.getItem('res'))
+    console.log(nData)
+    nData.forEach((elem)=>create(elem))
+
+
+
+    function create(data){
+        let {id,snippet,thumbnail} =data
+        console.log(data)
+        let a = document.createElement("a")
+        let div = document.createElement("div")
+        let img = document.createElement("img")
+        let div2 = document.createElement("div")
+        let h2 = document.createElement("h2")
+        let p = document.createElement("p")
+        div2.append(h2,p)
+        p.innerText = snippet.channelTitle
+        img.src = snippet.thumbnails.high.url
+        let title = snippet.title
+        console.log(title)
+        if(title.length>=30){
+            h2.innerText= title.substring(0,30)+"..."
+        }
+        div.append(img,div2)
+        a.href = "playVdo.html"
+        a.append(div)
+        a.onclick = function(){
+            vdo(data)
+        }
+        suggetions.append(a)
+    }
+
+    function vdo(elem){
+        console.log(elem)
+        let videoId = JSON.parse(localStorage.getItem('videoId'))
+            if(videoId == null){
+                videoId = (elem)
+                localStorage.setItem('videoId',JSON.stringify(videoId))
+            }else{
+                videoId = (elem)
+                localStorage.setItem('videoId',JSON.stringify(videoId))
+            }
+    }
+
+
+    async function search(){
+        try {
+            let search = document.getElementById("search")
+
+            let data = await fetch(`https://youtube.googleapis.com/youtube/v3/search?key=${key}&q=${search.value}&maxResults=10&thumbnail&type=video&part=snippet`)
+            data = await data.json()
+            let res = localStorage.setItem("res",JSON.stringify([]))
+            if(res === null){
+                res = []
+            }else{
+            res = []
+            localStorage.setItem("res",JSON.stringify(res))
+            }
+            res = [...data.items]
+            console.log(res)
+            localStorage.setItem("res",JSON.stringify(res))
+            suggetions.innerHTML=""
+            res.forEach((elem)=>create(elem))
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+</script>
