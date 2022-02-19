@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+        display: flex;
+        /* flex-wrap: wrap; */
+    }
+    #container>div{
+        width: 100%;
+        min-width: 350px;
+        max-width: 50%;
+        border: 1px solid black;
+    }
+    #left>div{
+        display: flex;
+        justify-content:space-around;
+        /* border: 1px solid red; */
+        margin-bottom:10px;
+       
+    }
+    #left>div>img{
+        width:200px;
+    }
+    #left>div>div{
+        width:50%;
+    }
+
+</style>
+<body>
+    CART PAGE
+    <div id="container">
+        <div id="left"></div>
+        <div id="right">
+            <h1 id="pri"></h1>
+           coupon code: <input type="text" id="coupon">
+            <button onclick ="checkOut()">Check out</button>
+        </div>
+
+    </div>
+</body>
+</html>
+<script>
+    let left = document.getElementById("left");
+    let localCart = JSON.parse(localStorage.getItem("localCart"))
+    localCart.forEach((elem)=>create(elem))
+    let total = localCart.reduce((acc, obj) =>( acc + obj.price), 0)
+    let price = document.getElementById("pri")
+        price.innerText =""
+        price.innerText = "Total ="+total
+
+
+    function checkOut(){
+        let coup = document.getElementById("coupon")
+        if(coup.value == "MASAI30"){
+            console.log(price.innerText)
+            let ac = price.innerText.split("=")
+            ac[ac.length-1] = +ac[ac.length-1]*(30/100)
+            console.log(ac[ac.length-1])
+            price.innerText = ac.join("=")
+            let accc = JSON.parse(localStorage.getItem("ac"))
+            if(accc==null){
+                accc = ac[ac.length-1]
+                localStorage.setItem("ac",JSON.stringify(accc))
+            }
+
+        }
+        location.href = "checkOut.html"
+    }
+    
+    // localCart.forEach((elem)=>arr.push(elem.))
+    
+    function create(data){
+        let div = document.createElement("div")
+        let img = document.createElement("img")
+        let div2 = document.createElement("div")
+        let p = document.createElement("p")
+        let p1 = document.createElement("p")
+        let btn = document.createElement("button")
+        img.src = data.image
+        p.innerText = data.title
+        p1.innerText = data.price+"rs"
+        btn.innerText = "delete"
+        btn.onclick = function(){
+            del(data)
+        }
+        div2.append(p,p1,btn)
+        div.append(img,div2)
+        left.append(div)
+    }   
+    console.log(localCart)
+
+    function del(data){
+        let arr = localCart.filter((elem)=>elem.id!=data.id&&elem)
+        localStorage.setItem("localCart",JSON.stringify(arr))
+        localCart = JSON.parse(localStorage.getItem("localCart"))
+        left.innerHTML = ""
+        localCart.forEach((elem)=>create(elem))
+        let total = localCart.reduce((acc, obj) =>( acc + obj.price), 0)
+        console.log(total)
+        let price = document.getElementById("pri")
+        price.innerText =""
+        price.innerText = "Total ="+total
+    }
+
+</script>
