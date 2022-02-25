@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        display: flex;
+    }
+    body>div{
+        width: 100%;
+        border:2px solid rgb(48, 48, 82);
+        height:600px;
+    }
+    h1{
+        border:1px solid red;
+        margin-top: 0px;
+    }
+</style>
+<body>
+    <div>
+        <input type="text" id ="inp"><select id="select"></select>
+        <button onclick="trans()">Translate</button>
+    </div>
+    <div id="translated">
+        <h1 id="username"></h1> 
+        <h3 id="transl"></h3>
+    </div>
+</body>
+</html>
+<script>
+    let url = "https://libretranslate.de/translate"
+    let inp = document.getElementById("inp")
+    let translated = document.getElementById("transl")
+    let username = document.getElementById("username")
+    let select = document.getElementById("select")
+
+    let name = JSON.parse(localStorage.getItem("user"))
+    console.log(name)
+    username.innerText ="User : "+ name.name
+    
+    const trans = async () =>{
+        try{
+            let data = await fetch(url,{
+                method: "POST",
+                body: JSON.stringify({
+                    q:inp.value,
+                    source:"en",
+                    target:select.value
+                }),
+                headers: { "Content-Type": "application/json" }
+            })
+            data  = await data.json()
+            console.log(data)
+            create(data.translatedText)
+
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    function create(str){
+        translated.innerHTML=""
+        translated.innerText = str
+    }
+
+    const optio=async()=>{
+        try{
+            let data = await fetch("https://libretranslate.de/languages")
+            data = await data.json()
+            data.map((elem)=>opt(elem))
+        }catch(err){
+            console.log(err)
+        }
+    }
+    optio()
+
+    function opt(opt){
+        let option = document.createElement("option")
+        option.innerText = opt.name
+        option.value = opt.code
+        select.append(option)
+    }
+
+</script>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="name" placeholder="Enter Your Name"><br>
+        <input type="text" id="email" placeholder="email"><br>
+        <input type="text" id="password" placeholder="Password"><br>
+        <input type="text" id="username" placeholder="username"><br>
+        <input type="text" id="mobile" placeholder="mobile"><br>
+        <input type="text" id="description" placeholder="description"><br>
+        <button onclick="trans()">SIgn Up</button>
+    </div>
+    <div>
+        <input placeholder="username" id="uname"><br>
+        <input placeholder="password" id="pwd"><br>
+        <button onclick="login()">LogIn</button>
+    </div>
+</body>
+
+</html>
+<script>
+    let url = "https://masai-api-mocker.herokuapp.com/auth/register"
+    const trans = async () => {
+        try {
+            let data = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify({
+                    "name": document.getElementById("name").value,
+                    "email": document.getElementById("email").value,
+                    "password": document.getElementById("password").value,
+                    "username": document.getElementById("username").value,
+                    "mobile": document.getElementById("mobile").value,
+                    "description": document.getElementById("description").value
+                }),
+                headers: { "Content-Type": "application/json" }
+            })
+            data = await data.json()
+            console.log(data)
+
+            // create(data.translatedText)
+
+        } catch (err) {
+            alert(err)
+        }
+    }
+
+
+    async function login(){
+        try{
+            let url = "https://masai-api-mocker.herokuapp.com/auth/login"
+            let data = await fetch(url,{
+                method: "POST",
+                body: JSON.stringify({
+                    "password":document.getElementById("pwd").value ,
+                    "username": document.getElementById("uname").value 
+                }),
+                headers: { "Content-Type": "application/json" }
+            })
+            data =await data.json()
+            console.log(data)
+            getUser(document.getElementById("uname").value ,data.token)
+        }catch (err) {
+            alert(err)
+        }
+    }
+
+    async function getUser(username,token){
+        try{
+            let url = `https://masai-api-mocker.herokuapp.com/user/${username}`
+            let data = await fetch(url, {
+                headers: { "Content-Type": "application/json" ,
+                Authorization:`Bearer ${token}`
+            }
+            })
+            data = await data.json()
+            console.log(data)
+            localStorage.setItem("user",JSON.stringify(data))
+            location.href = "translate.html"
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+</script>
